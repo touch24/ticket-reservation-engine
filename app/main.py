@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-app = FastAPI(titile="Ticker Reservation System")
+app = FastAPI(title="Ticket Reservation System")
 
 @app.get("/")
 async def root():
