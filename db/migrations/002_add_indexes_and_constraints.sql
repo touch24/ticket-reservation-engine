@@ -1,5 +1,6 @@
 BEGIN;
 
+ALTER TABLE tickets DROP CONSTRAINT IF EXISTS uq_tickets_reservation_id;
 ALTER TABLE tickets 
     ADD CONSTRAINT uq_tickets_reservation_id UNIQUE (reservation_id);
 
