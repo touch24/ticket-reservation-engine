@@ -1,3 +1,5 @@
+BEGIN;
+
 CREATE TYPE reservation_status AS ENUM(
     'PENDING', 
     'CONFIRMED', 
@@ -38,7 +40,7 @@ CREATE TABLE reservations (
     "ticket_type_id" BIGINT NOT NULL,
     "status" reservation_status NOT NULL DEFAULT 'PENDING',
     "expires_at" TIMESTAMPTZ NOT NULL,
-    "create_at" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "created_at" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT fk_reservations_user_id
         FOREIGN KEY (user_id)
@@ -90,3 +92,5 @@ CREATE TABLE tickets(
         REFERENCES "ticket_types" ("id")
         ON DELETE RESTRICT
 );
+
+COMMIT;
