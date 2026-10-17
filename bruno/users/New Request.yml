@@ -1,0 +1,23 @@
+info:
+  name: New Request
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: http://localhost:8000/users
+  body:
+    type: json
+    data: |-
+      {
+        "email": "example4@gmail.com",
+        "full_name": "example"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

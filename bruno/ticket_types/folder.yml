@@ -1,0 +1,7 @@
+info:
+  name: ticket_types
+  type: folder
+  seq: 4
+
+request:
+  auth: inherit
