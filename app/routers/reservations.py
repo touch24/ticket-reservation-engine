@@ -1,4 +1,5 @@
 from fastapi import APIRouter, status, Depends, HTTPException
+from app.exceptions import EntityNotFoundError, InventoryExhaustedError
 from app.schemas.reservation import ReservationCreate, ReservationResponse
 from app.database import get_db_connection
 from app.repositories.reservation_repository import ReservationRepository
@@ -11,24 +12,19 @@ async def add_reservation(payload: ReservationCreate, conn: asyncpg.Connection=D
     repo = ReservationRepository(conn)
 
     try:
-        reservation_data = dict(await repo.create_reservation(user_public_id=payload.user_public_id, ticket_type_public_id=payload.ticket_type_public_id))
-    except LookupError:
+        return await repo.create_reservation(user_public_id=payload.user_public_id, ticket_type_public_id=payload.ticket_type_public_id)
+    except EntityNotFoundError:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="User or Ticket Type not found"
         )
-    except ValueError:
+    except InventoryExhaustedError:
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
             detail="Ticket Capacity Exhausted"
         )
-    except Exception as err:
+    except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error: {err}"
+            detail="Internal Server Error"
         )
-
-    reservation_data["ticket_type_public_id"] = payload.ticket_type_public_id
-    reservation_data["user_public_id"] = payload.user_public_id
-
-    return reservation_data

@@ -8,8 +8,6 @@ class ReservationCreate(BaseModel):
 
 class ReservationResponse(BaseModel):
     public_id: UUID
-    user_public_id: UUID
-    ticket_type_public_id: UUID
     status: str
     created_at: datetime
     expires_at: datetime

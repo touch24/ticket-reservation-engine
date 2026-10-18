@@ -24,7 +24,7 @@ class ReservationRepository():
 
             expires_at: datetime = datetime.now(timezone.utc) + timedelta(minutes=hold_minutes)
 
-            return await self.conn.fetchrow("INSERT INTO reservations (user_id, ticket_type_id, status, expires_at) VALUES ($1, $2, 'PENDING', $3) RETURNING id, public_id, status, expires_at, created_at;", user_id, ticket_type["id"], expires_at)
+            return dict(await self.conn.fetchrow("INSERT INTO reservations (user_id, ticket_type_id, status, expires_at) VALUES ($1, $2, 'PENDING', $3) RETURNING id, public_id, status, expires_at, created_at;", user_id, ticket_type["id"], expires_at))
 
 
 
