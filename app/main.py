@@ -2,12 +2,14 @@ from fastapi import FastAPI, HTTPException, status
 import asyncpg
 from app.routers.ticket_types import router as ticket_types_router
 from app.routers.users import router as users_router
+from app.routers.reservations import router as reservation_router
 from app.database import lifespan
 
 app = FastAPI(title="Ticket Reservation System", lifespan=lifespan)
 
 app.include_router(users_router)
 app.include_router(ticket_types_router)
+app.include_router(reservation_router)
 
 @app.get("/")
 async def root():
