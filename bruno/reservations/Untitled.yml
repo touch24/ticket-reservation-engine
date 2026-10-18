@@ -1,0 +1,23 @@
+info:
+  name: Untitled
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: http://localhost:8000/reservations/
+  body:
+    type: json
+    data: |-
+      {
+        "user_public_id": "c1e89645-957d-44bd-91b0-46044e57cd33",
+        "ticket_type_public_id": "0ddfbb1c-f7dc-4bf0-8a9e-e199bae41ce8"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

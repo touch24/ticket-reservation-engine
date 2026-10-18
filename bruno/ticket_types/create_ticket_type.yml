@@ -5,13 +5,13 @@ info:
 
 http:
   method: POST
-  url: http://localhost:8000/ticket_types
+  url: http://localhost:8000/ticket_types/
   body:
     type: json
     data: |-
       {
-        "name": "General Admission4",
-        "total_capacity": "500",
+        "name": "New Ticket 1",
+        "total_capacity": "1",
         "price_in_cents": "2500"
       }
   auth: inherit

@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: http://localhost:8000/ticket_types
+  url: http://localhost:8000/ticket_types/
   auth: inherit
 
 settings:
